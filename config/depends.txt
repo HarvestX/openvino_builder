@@ -1,0 +1,3 @@
+git
+cmake
+libusb-1.0-0-dev
