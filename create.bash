@@ -16,8 +16,14 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+DPKG_ROOT=${SCRIPT_DIR}/deb/openvino_2022/
+INSTALL_DIR="/opt/intel/openvino_2022"
+REAL_INSTALL_DIR=${DPKG_ROOT}/${INSTALL_DIR}
+mkdir -p ${REAL_INSTALL_DIR}
+
 docker run -it --rm --net=host \
     -v $SCRIPT_DIR/workspace:/workspace \
+    -v ${REAL_INSTALL_DIR}:${INSTALL_DIR} \
     build_container \
     /bin/bash -c "bash /workspace/build.bash ${DISTRO}"
 
@@ -36,3 +42,8 @@ echo "--------------------------"
 echo "zip : -"
 echo "distro : ${DISTRO}"
 echo "--------------------------"
+
+# docker run -it --rm --net=host \
+#     -v $(pwd)/workspace:/workspace \
+#     build_container \
+#     /bin/bash
