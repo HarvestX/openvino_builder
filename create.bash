@@ -29,11 +29,6 @@ docker run -it --rm --net=host \
 
 cd $SCRIPT_DIR/workspace
 
-# zip -r ${SCRIPT_DIR}/${DISTRO}-aarch64.zip ${DISTRO}
-# if [ $? -ne 0 ]; then
-#     echo "Failed to zip."
-#     exit 1
-# fi
 cd ${SCRIPT_DIR}
 
 echo ""
@@ -46,6 +41,7 @@ echo "--------------------------"
 # docker run -it --rm --net=host -v $(pwd)/workspace:/workspace build_container /bin/bash
 
 # create dpkg ------------------------------------------------
+DEB_ROOT=${SCRIPT_DIR}/deb/openvino_2022/
 CONTROL_FILE=${DEB_ROOT}/DEBIAN/control
 
 # ------------------------------------
