@@ -5,9 +5,9 @@ echo "pkg builder"
 SCRIPT_DIR=`realpath $(dirname "$0")`
 
 # setup qemu (if this computer arch is x86_64)
-if [ "$(uname -m)" == "x86_64" ]; then
-    docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-fi
+# if [ "$(uname -m)" == "x86_64" ]; then
+    # docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+# fi
 
 cd $SCRIPT_DIR
 docker build -t build_container .
@@ -72,7 +72,7 @@ echo "Priority: optional" >> ${CONTROL_FILE}
 echo "Architecture: ${ARCH}" >> ${CONTROL_FILE}
 echo "Depends: ${DEPENDS}" >> ${CONTROL_FILE}
 echo "Maintainer: Ar-Ray-code <ray255ar@gmail.com>" >> ${CONTROL_FILE}
-echo "Description: OpenVINO 2022 for Raspberry Pi OS ${OS_DISTRO} ${ARCH}" >> ${CONTROL_FILE}
+echo "Description: OpenVINO 2022 for Intel NUC ${OS_DISTRO} ${ARCH}" >> ${CONTROL_FILE}
 
 dpkg-deb --build --root-owner-group ${DEB_ROOT} ${SCRIPT_DIR}/output/openvino-2022-raspbian-${OS_DISTRO}-${ARCH}-${VERSION}-${DATE}.deb
 
