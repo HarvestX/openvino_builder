@@ -1,23 +1,21 @@
 #!/bin/bash
 SCRIPT_DIR=`realpath $(dirname "$0")`
+CONFIG_DIR="${SCRIPT_DIR}/config"
+WORKSPACE_DIR="${SCRIPT_DIR}/workspace"
 
 cd $SCRIPT_DIR
 docker build -t build_container .
-if [ $? -ne 0 ]; then
-    echo "Failed to build docker image"
-    exit 1
-fi
 
-DPKG_ROOT=${SCRIPT_DIR}/deb/openvino_2022/
-INSTALL_DIR="/opt/intel/openvino_2022"
+DPKG_ROOT=${SCRIPT_DIR}/deb/openvino/
+INSTALL_DIR="/opt/intel/openvino"
 REAL_INSTALL_DIR=${DPKG_ROOT}/${INSTALL_DIR}
 mkdir -p ${REAL_INSTALL_DIR}
 
 docker run -it --rm --net=host \
-    -v $SCRIPT_DIR/workspace:/workspace \
+    -v $WORKSPACE_DIR:/workspace \
     -v ${REAL_INSTALL_DIR}:${INSTALL_DIR} \
     build_container \
-    /bin/bash -c "bash /workspace/build.bash ${DISTRO}"
+    /bin/bash -c "bash /workspace/build.bash ${VERSION}"
 
 cd $SCRIPT_DIR/workspace
 
@@ -33,14 +31,6 @@ echo "--------------------------"
 # create dpkg ------------------------------------------------
 DEB_ROOT=${SCRIPT_DIR}/deb/openvino_2022/
 CONTROL_FILE=${DEB_ROOT}/DEBIAN/control
-
-# ------------------------------------
-VERSION=$(cat ${SCRIPT_DIR}/config/version.txt)
-DEPENDS=$(cat ${SCRIPT_DIR}/config/depends.txt | tr '\n' ',' | sed 's/,$//')
-ARCH=$(cat ${SCRIPT_DIR}/config/arch.txt)
-OS_DISTRO=$(cat ${SCRIPT_DIR}/config/os_distro.txt)
-# ------------------------------------
-DATE=$(date +%Y%m%d)
 
 echo ""
 echo "------------------------------------"
@@ -62,7 +52,7 @@ echo "Priority: optional" >> ${CONTROL_FILE}
 echo "Architecture: ${ARCH}" >> ${CONTROL_FILE}
 echo "Depends: ${DEPENDS}" >> ${CONTROL_FILE}
 echo "Maintainer: Ar-Ray-code <ray255ar@gmail.com>" >> ${CONTROL_FILE}
-echo "Description: OpenVINO 2022 for Intel NUC ${OS_DISTRO} ${ARCH}" >> ${CONTROL_FILE}
+echo "Description: OpenVINO Cpp Runtime Package for ${OS_DISTRO} ${ARCH}" >> ${CONTROL_FILE}
 
 dpkg-deb --build --root-owner-group ${DEB_ROOT} ${SCRIPT_DIR}/output/openvino-2022-${OS_DISTRO}-${ARCH}-${VERSION}-${DATE}.deb
 

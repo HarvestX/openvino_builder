@@ -30,11 +30,6 @@ RUN apt-get update && \
 	libtbb-dev \
 	libpugixml-dev \
 	libva-dev \
-	python3-pip \
-	python3-venv \
-	python3-enchant \
-	python3-setuptools \
-	libpython3-dev \
 	pkg-config \
 	libgflags-dev \
 	zlib1g-dev \
@@ -44,8 +39,5 @@ RUN apt-get update && \
 	libtinfo5 \
 	git-lfs \
 	unzip
-
-RUN pip install --upgrade pip
-RUN pip install cython
 
 WORKDIR /workspace

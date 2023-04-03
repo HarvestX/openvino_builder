@@ -1,1 +1,1 @@
-jammy
+ubuntu22
