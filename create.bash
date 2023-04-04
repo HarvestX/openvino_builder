@@ -1,13 +1,5 @@
 #!/bin/bash
-
-echo "pkg builder"
-
 SCRIPT_DIR=`realpath $(dirname "$0")`
-
-# setup qemu (if this computer arch is x86_64)
-# if [ "$(uname -m)" == "x86_64" ]; then
-    # docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-# fi
 
 cd $SCRIPT_DIR
 docker build -t build_container .
@@ -38,8 +30,6 @@ echo "zip : -"
 echo "distro : ${DISTRO}"
 echo "--------------------------"
 
-# docker run -it --rm --net=host -v $(pwd)/workspace:/workspace build_container /bin/bash
-
 # create dpkg ------------------------------------------------
 DEB_ROOT=${SCRIPT_DIR}/deb/openvino_2022/
 CONTROL_FILE=${DEB_ROOT}/DEBIAN/control
@@ -65,7 +55,7 @@ mkdir -p ${DEB_ROOT}/DEBIAN
 mkdir -p ${SCRIPT_DIR}/output
 rm -rf ${CONTROL_FILE}
 
-echo "Package: openvino-2022-raspbian-${OS_DISTRO}-${ARCH}" > ${CONTROL_FILE}
+echo "Package: openvino-2022-${OS_DISTRO}-${ARCH}" > ${CONTROL_FILE}
 echo "Version: ${VERSION}" >> ${CONTROL_FILE}
 echo "Section: base" >> ${CONTROL_FILE}
 echo "Priority: optional" >> ${CONTROL_FILE}
@@ -74,6 +64,6 @@ echo "Depends: ${DEPENDS}" >> ${CONTROL_FILE}
 echo "Maintainer: Ar-Ray-code <ray255ar@gmail.com>" >> ${CONTROL_FILE}
 echo "Description: OpenVINO 2022 for Intel NUC ${OS_DISTRO} ${ARCH}" >> ${CONTROL_FILE}
 
-dpkg-deb --build --root-owner-group ${DEB_ROOT} ${SCRIPT_DIR}/output/openvino-2022-raspbian-${OS_DISTRO}-${ARCH}-${VERSION}-${DATE}.deb
+dpkg-deb --build --root-owner-group ${DEB_ROOT} ${SCRIPT_DIR}/output/openvino-2022-${OS_DISTRO}-${ARCH}-${VERSION}-${DATE}.deb
 
 echo "dpkg-deb done."
