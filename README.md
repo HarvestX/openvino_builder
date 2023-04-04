@@ -1,5 +1,5 @@
 # openvino_builder
-OpenVINO builder for Intel NUC
+OpenVINO builder for amd64
 
 ## Requirements
 
