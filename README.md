@@ -11,5 +11,5 @@ OpenVINO builder for Intel NUC
 git clone https://github.com/HarvestX/openvino_builder
 cd openvino_builder
 
-bash create.bash
+make build
 ```
