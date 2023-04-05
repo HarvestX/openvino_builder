@@ -30,6 +30,7 @@ CONTROL_FILE:=$(DEBIAN_DIR)/control
 build_control_file:
 	mkdir -p $(DEBIAN_DIR)
 	VERSION=$(VERSION) \
+	CODENAME=$(CODENAME) \
 	ARCH=$(ARCH) \
 	envsubst < $(ROOT_DIR)/template/control > $(CONTROL_FILE)
 
