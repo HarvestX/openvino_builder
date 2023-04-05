@@ -1,5 +1,6 @@
-ARCH=amd64
 VERSION=2022.3.0
+CODENAME=$(cat /etc/os-release | grep UBUNTU_CODENAME | awk -F= '{ print $NF }')
+ARCH=$(dpkg --print-architecture)
 
 ROOT_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 WORKSPACE_DIR:=$(ROOT_DIR)/workspace
@@ -12,7 +13,7 @@ OUTPUT_DIR:=$(ROOT_DIR)/output
 build: build_control_file build_openvino
 	mkdir -p $(OUTPUT_DIR)
 	dpkg-deb --build --root-owner-group $(DPKG_ROOT) \
-		$(OUTPUT_DIR)/openvino-$(ARCH)-$(VERSION).deb
+		$(OUTPUT_DIR)/openvino_$(VERSION)-0$(CODENAME)_$(ARCH).deb
 
 build_container:
 	docker build -t openvino_builder $(ROOT_DIR)/docker
