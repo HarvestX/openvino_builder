@@ -1,6 +1,6 @@
 VERSION=2022.3.0
-CODENAME=$(cat /etc/os-release | grep UBUNTU_CODENAME | awk -F= '{ print $NF }')
-ARCH=$(dpkg --print-architecture)
+CODENAME=jammy
+ARCH=amd64
 
 ROOT_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 WORKSPACE_DIR:=$(ROOT_DIR)/workspace

@@ -20,7 +20,6 @@ cmake \
   -DCMAKE_BUILD_TYPE=Release \
   -DTHREADING=SEQ \
   -DENABLE_PYTHON=OFF \
-  -DCMAKE_INSTALL_PREFIX=/opt/intel/openvino \
   -DCMAKE_CXX_FLAGS="-march=native -mtune=native -O3" \
   -DCMAKE_C_FLAGS="-march=native -mtune=native -O3" ..
 
