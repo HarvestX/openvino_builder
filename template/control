@@ -1,6 +1,6 @@
 Package: openvino
-Version: $VERSION
-Section: base
+Version: $VERSION-0$CODENAME
+Section: devel
 Priority: optional
 Architecture: $ARCH
 Depends: git,cmake,libusb-1.0-0-dev,libpugixml-dev
