@@ -43,7 +43,7 @@ RUN apt-get update && \
 
 RUN apt-get install ocl-icd-libopencl1 -y
 
-# Install Intel Graphics Compute Runtime for OpenCL Driver package to enable inference on INtel integrated GPUs
+# Install Intel Graphics Compute Runtime for OpenCL Driver package to enable inference on Intel integrated GPUs
 # https://github.com/intel/compute-runtime/releases/tag/19.41.14441
 RUN wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.13230.7/intel-igc-core_1.0.13230.7_amd64.deb && \
 	wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.13230.7/intel-igc-opencl_1.0.13230.7_amd64.deb && \
