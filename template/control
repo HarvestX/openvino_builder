@@ -1,8 +1,0 @@
-Package: openvino
-Version: $VERSION
-Section: base
-Priority: optional
-Architecture: $ARCH
-Depends: git,cmake,libusb-1.0-0-dev,libpugixml-dev, ocl-icd-libopencl1
-Maintainer: Ar-Ray-code <ray255ar@gmail.com>
-Description: OpenVINO Cpp Runtime Package

@@ -1,5 +1,6 @@
 # openvino_builder
-OpenVINO builder for amd64
+
+Debian package builder for OpenVINO.
 
 ## Requirements
 
@@ -7,9 +8,10 @@ OpenVINO builder for amd64
 
 ## Build
 
-```bash
-git clone https://github.com/HarvestX/openvino_builder
-cd openvino_builder
+Just run the following command.
 
-make build
+```bash
+make
 ```
+
+After the build finished successfully, generated debian packages would be stored in `deb/` directory.
