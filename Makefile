@@ -17,4 +17,4 @@ build_openvino: build_container
 
 output_deb: build_openvino
 	mkdir -p $(ROOT_DIR)/deb/
-	cp $(WORKSPACE_DIR)/build/*.deb $(ROOT_DIR)/deb/
+	find $(WORKSPACE_DIR)/ -type f -name "*.deb" -exec cp {} $(ROOT_DIR)/deb/ \;
