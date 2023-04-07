@@ -1,3 +1,4 @@
+# Reference: https://github.com/openvinotoolkit/openvino/blob/master/docs/dev/build_linux.md
 FROM ubuntu:22.04
 
 ENV TZ=Asia/Tokyo
@@ -42,6 +43,8 @@ RUN apt-get update && \
 
 RUN apt-get install ocl-icd-libopencl1 -y
 
+# Install Intel Graphics Compute Runtime for OpenCL Driver package to enable inference on Intel integrated GPUs
+# https://github.com/intel/compute-runtime/releases/tag/19.41.14441
 RUN wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.13230.7/intel-igc-core_1.0.13230.7_amd64.deb && \
 	wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.13230.7/intel-igc-opencl_1.0.13230.7_amd64.deb && \
 	wget https://github.com/intel/compute-runtime/releases/download/23.05.25593.11/intel-level-zero-gpu-dbgsym_1.3.25593.11_amd64.ddeb && \
