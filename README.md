@@ -1,3 +1,5 @@
+This repository was archived because official debian packages for openvino have become available for Ubuntu 22.04.
+
 # openvino_builder
 
 Debian package builder for OpenVINO.
